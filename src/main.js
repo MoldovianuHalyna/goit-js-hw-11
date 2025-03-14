@@ -6,21 +6,20 @@ import icon from './img/icon.svg';
 const refs = {
   form: document.querySelector('.form'),
   gallery: document.querySelector('.gallery'),
-  loader: document.querySelector('.loader'),
+  backdrop: document.querySelector('.backdrop'),
 };
 // Function to show the loader
 const showLoader = () => {
-  refs.loader.style.display = 'inline-block';
-  refs.gallery.style.display = 'none';
+  refs.backdrop.classList.remove('is-hidden');
 };
 
 // Function to hide the loader
 const hideLoader = () => {
-  refs.loader.style.display = 'none';
-  refs.gallery.style.display = 'flex';
+  refs.backdrop.classList.add('is-hidden');
 };
 
 //getting data from server and creating a gallery
+
 const searchInputHandeling = function (event) {
   event.preventDefault();
   const dataName = event.currentTarget.elements['search-text'].value.trim();
@@ -29,8 +28,8 @@ const searchInputHandeling = function (event) {
     alert('Please enter a valid data');
     return;
   }
-  showLoader();
 
+  showLoader();
   getPhotoFromServer(dataName)
     .then(({ hits }) => {
       if (hits.length === 0) {
@@ -65,6 +64,8 @@ const searchInputHandeling = function (event) {
         timeout: 10000,
       });
     })
-    .finally(hideLoader);
+    .finally(() => {
+      hideLoader();
+    });
 };
 refs.form.addEventListener('submit', searchInputHandeling);
