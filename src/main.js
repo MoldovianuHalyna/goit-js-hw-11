@@ -31,7 +31,7 @@ const searchInputHandeling = function (event) {
 
   showLoader();
   getPhotoFromServer(dataName)
-    .then(({ hits }) => {
+    .then(({ data: { hits } }) => {
       if (hits.length === 0) {
         iziToast.error({
           messageColor: '#fff',
