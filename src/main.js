@@ -1,6 +1,7 @@
 import iziToast from 'izitoast';
 import { getPhotoFromServer } from './js/pixabay-api';
 import { createGalleryMarkup, createLightBox } from './js/render-functions';
+import icon from './img/icon.svg';
 //selecting the elements
 const refs = {
   form: document.querySelector('.form'),
@@ -35,6 +36,8 @@ const searchInputHandeling = function (event) {
       if (hits.length === 0) {
         iziToast.error({
           messageColor: '#fff',
+          close: false,
+          iconUrl: icon,
           backgroundColor: '#ef4040',
           position: 'topRight',
           message:
